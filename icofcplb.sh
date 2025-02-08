@@ -22,7 +22,7 @@ search_git_dirs() {
                 case "$index_status$worktree_status" in
                     '??') status_desc="untracked"; has_changes=true ;;
                     'M ') status_desc="added"; has_changes=true ;;
-                    'MM') status_desc="modified"; has_changes=true ;;
+                    ' M' | 'MM') status_desc="modified"; has_changes=true ;;
                     'D ' | ' D' | 'DM') status_desc="deleted"; has_changes=true ;;
                     'R ' | ' R' | 'RM') status_desc="renamed"; has_changes=true ;;
                     'C ' | ' C' | 'CM') status_desc="copied"; has_changes=true ;;
@@ -42,6 +42,13 @@ search_git_dirs() {
         fi
     done
 }
+
+# Check for --help argument
+if [[ "$1" == "--help" ]]; then
+    echo "Usage: $0 [directory]"
+    echo "If no directory is specified, the default path $DEFAULT_SEARCH_PATH will be used."
+    exit 0
+fi
 
 # Determine the path to search
 SEARCH_PATH="${1:-$DEFAULT_SEARCH_PATH}"
