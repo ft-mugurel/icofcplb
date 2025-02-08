@@ -23,19 +23,20 @@ search_git_dirs() {
                     '??') status_desc="untracked"; has_changes=true ;;
                     'M ') status_desc="added"; has_changes=true ;;
                     ' M' | 'MM') status_desc="modified"; has_changes=true ;;
-                    'D ' | ' D' | 'DM') status_desc="deleted"; has_changes=true ;;
+                    'D ' | ' D' | 'MD') status_desc="deleted"; has_changes=true ;;
                     'R ' | ' R' | 'RM') status_desc="renamed"; has_changes=true ;;
                     'C ' | ' C' | 'CM') status_desc="copied"; has_changes=true ;;
                     'UU') status_desc="unmerged"; has_changes=true ;;
                     *) status_desc="unknown" ;;
                 esac
-                echo "$status_desc: $file_path"
+                echo -e "\033[1;31m$status_desc: $file_path\033[0m"
             done <<< "$status_output"
 
             # If there are no changes, check for unpushed commits
             if [ "$has_changes" = false ]; then
                 echo -e "\033[1;33mUnpushed commits in $repo_name:\033[0m"
-                (cd "$repo_dir" && git cherry -v)
+                unpushed_commits=$(cd "$repo_dir" && git cherry -v)
+                echo -e "\033[1;31m$unpushed_commits\033[0m"
             fi
 
             echo -e "\033[0m"  # Reset color
