@@ -14,13 +14,6 @@ A simple script that scans all directories containing Git repositories and check
 ## Installation
 Ensure you have Git installed on your system. Clone this repository and navigate into the directory:
 
-```sh
-# Clone the repository
-git clone <repository-url>
-cd icofcplb
-
-# Make the script executable (if applicable)
-chmod +x git-checker.sh
 ```
 
 ## Usage
