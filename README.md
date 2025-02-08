@@ -85,6 +85,12 @@ Now you can run the script from anywhere:
 icofcplb.sh /path/to/search
 ```
 
+The name is not easy to remember so you can create an alias:
+
+```sh
+alias lg="icofcplb"
+```
+
 ## Requirements
 - Git
 - Bash
